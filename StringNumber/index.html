@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StringNumber</title>
+</head>
+<body>
+
+    <script>
+        let time = 14.45;
+        const convert_number = function(num){
+            
+        
+        const str = time.toString();
+
+        const separaPartes = str.split('.');
+
+        const numeroInteiro = parseInt(separaPartes[0]);
+        const numeroFlutuante = parseInt(separaPartes[1] || [0]);
+
+         return `Há alguns minutos atrás eram ${numeroInteiro}:${Math.abs(numeroFlutuante)} horas, e daqui a alguns minutos serão ${numeroInteiro}:${numeroFlutuante + 05} horas!!`;
+           
+         // consegui realizar dessa forma, entretanto juguei utilizar o Math.abs, 
+         // devido o tipo de função não achei valido arredondar.
+        }
+
+        console.log(convert_number())
+       
+       
+        
+
+    </script>
+    
+</body>
+</html>
