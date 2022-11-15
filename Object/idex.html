@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+let objDevInHouse= {
+
+  plataforma: "DevInHouse",
+  cursos: {
+
+    dados: ["SQL"],
+    backend: ["Java", "Spring"],
+    frontend: ["Javascript", "React"]
+},
+
+   objUser : {
+
+    nome: ["Gismi"],
+    idade:[28],
+    cidade: ["Florianopolis"]
+}
+
+};
+
+
+objDevInHouse.objUser.nome[0]= "Gismi Guimaraes";
+objDevInHouse.objUser.idade[0]= "28"; // Ao debugar na linha de comando, vejamos que o tipo é mudado para string!!
+
+console.table(objDevInHouse)
+
+
+
+    </script>
+</body>
+</html>
