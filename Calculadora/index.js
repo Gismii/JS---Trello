@@ -36,7 +36,7 @@ calculadora();
         break;
 
         case "%":
-        window.alert(`A divisão inteira entre ${n1} e ${n2} é igual ${1%n2}!!`);
+        window.alert(`A divisão inteira entre ${n1} e ${n2} é igual ${n1%n2}!!`);
         break;
 
         case "**":
