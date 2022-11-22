@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gismi guimaraes ----</title>
+</head>
+<body>
+
+    
+    <Script>
+const getInitials = (name) =>{
+    if ( name !== ""){
+        const splittedName = name.split(" ")
+        const firstLetter = splittedName [0][0].toUpperCase()
+        const lastLetter = splittedName[splittedName.length - 1][0].toUpperCase()
+        return `${firstLetter}${lastLetter}`
+    } else {
+        return ""
+    }
+}
+
+let username = prompt("Insira o seu nome de Usuario:")
+const body = document.querySelector("Body")
+body.style.frontFamily = "sans-serif"
+body.style.display = "flex"
+body.style.flexDirection = "column"
+body.style.rowGap = "1rem"
+
+
+
+
+const form = document.createElement("form")
+form.style.boxShadow = "1px 1px 10px 0px rgba(0,0,0,0,5"
+form.style.borderRadius = ".25rem"
+form.style.padding = "1rem"
+form.style.display = "flex"
+form.style.flexDirection = "column"
+form.style.rowGap = "1rem"
+body.style.backgroundColor = "#2F5287" 
+
+
+const textLabel = document.createElement("label")
+textLabel.setAttribute("for", "tweetBox")
+textLabel.innerHTML = "No que voce esta pensando?"
+textLabel.style.position = "relative"
+textLabel.style.animationName="myNEWmove"
+
+
+const submitBtn = document.createElement("button")
+submitBtn.innerHTML = "Post"
+submitBtn.style.borderRadius = ".25rem"
+submitBtn.style.border = "none"
+submitBtn.style.padding = ".5rem"
+submitBtn.style.width = "3.5rem"
+submitBtn.style.fontWeight = "600"
+submitBtn.style.cursor = "pointer"
+submitBtn.style.backgroundColor = "#DDE4ED"
+
+const textArea = document.createElement("textarea")
+textArea.setAttribute("id", "tweetBox")
+textArea.setAttribute("rows", "4")
+textArea.style.padding = ".5rem 1rem"
+textArea.style.borderRadius = ".25rem"
+
+const erro = document.createElement("span")
+erro.innerHTML = "Voce execedeu o limite de carcteres."
+erro.style.padding = ".5rem 1rem"
+erro.style.backgroundColor = "#ECF235"
+erro.style.fontWeight = "600"
+erro.style.color = "#000000"
+erro.style.fontSize = ".8rem"
+erro.style.borderRadius = ".5rem"
+erro.style.width = "fit-content"
+erro.style.display = "none"
+
+textArea.addEventListener("keyup", () => {
+    if (textArea.value.length >= 280) {
+        erro.style.display = "inherit"
+        textArea.style.outline = "1px solid #FF0000"
+        submitBtn.setAttribute("disabled",true)
+    } else {
+        erro.style.display = "none"
+        textArea.style.outline = "none"
+        submitBtn.removeAttribute("disabled")
+    }
+})
+
+const tweetsBox = document.createElement("div")
+tweetsBox.style.display = "grid"
+tweetsBox.style.gridTemplateColumns = "1fr 1fr"
+tweetsBox.style.gap = "2rem"
+
+
+form.appendChild(textLabel)
+form.appendChild(textArea)
+form.appendChild(erro)
+form.appendChild(submitBtn)
+body.appendChild(form)
+body.appendChild(tweetsBox)
+
+const createDivider = () => {
+    const divider = document.createElement("hr")
+    divider.style.width = "100%"
+    divider.style.border = "none"
+    divider.style.borderTop = "3px solid #B0B8C2"
+    
+    return divider
+}
+
+const appendTweet = (tweet) => {
+    const novoComents = document.createElement("div")
+    novoComents.style.boxShadow = "1px 1px 10px 0 rgba(0,0,0,0,5"
+    novoComents.style.borderRadius = ".25rem"
+    novoComents.style.display = "flex"
+    novoComents.style.flexDirection = "column"
+    novoComents.style.rowGap = ".5rem"
+    novoComents.style.padding = "1rem 0"
+
+    const tweetHeader = document.createElement("div")
+    tweetHeader.style.display = "flex"
+    tweetHeader.style.padding = " 0 1rem"
+    tweetHeader.style.columnGap = "1rem"
+    tweetHeader.style.alignItems = "center"
+
+    const tweetAvatar = document.createElement("div")
+    tweetAvatar.style.width = "2rem"
+    tweetAvatar.style.height = "2rem"
+    tweetAvatar.style.borderRadius = "1rem"
+    tweetAvatar.style.backgroundColor = "#FFFF00"
+    tweetAvatar.innerHTML = getInitials(username)
+    tweetAvatar.style.display = "flex"
+    tweetAvatar.style.justifyContent = "center"
+    tweetAvatar.style.alignItems = "center"
+    tweetAvatar.style.color = "#8A2BE2"
+
+    const tweetUser = document.createElement("span")
+    tweetUser.innerHTML = username
+    tweetUser.style.fontWeight = "600"
+    
+    const tweetContent = document.createElement("span")
+    tweetContent.innerHTML = tweet
+    tweetContent.style.paddingLeft = "1rem"
+
+    const likeBtn = document.createElement("button")
+    likeBtn.innerHTML = "Curtir (0)"
+    likeBtn.setAttribute("value", "0")
+    likeBtn.style.borderRadius = ".25rem"
+    likeBtn.style.border = "none"
+    likeBtn.style.padding = ".5rem"
+    likeBtn.style.width = "5rem"
+    likeBtn.style.fontWeight = "600"
+    likeBtn.style.cursor = "pointer"
+    likeBtn.style.marginLeft = "1rem"
+    likeBtn.style.backgroundColor= "#DDE4ED"
+
+    likeBtn.addEventListener("click", (e) => {
+        let count = parseInt(e.target.value)
+        e.target.innerHTML = `Curtir (${count+1})`
+        e.target.value = count + 1
+    })
+
+    tweetHeader.appendChild(tweetAvatar)
+    tweetHeader.appendChild(tweetUser)
+    novoComents.appendChild(tweetHeader)
+    novoComents.appendChild(createDivider())
+    novoComents.appendChild(tweetContent)
+    novoComents.appendChild(createDivider())
+    novoComents.appendChild(likeBtn)
+
+    tweetsBox.insertBefore(novoComents, tweetsBox.firstChild)
+}
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault()
+    let tweet = form.elements["tweetBox"]
+    if (tweet.value !== "") {
+        appendTweet(tweet.value)
+        tweet.value = ""
+    }
+})
+
+
+
+
+    </Script>
+</body>
+</html>
